@@ -17,14 +17,44 @@
         }
 
         .container {
-            margin: auto;
+            position: relative;
+            font-size: 0;
+        }
+
+        .box {
+            border: 1px solid black;
+            width: 40%;
+            transform: translate(75%, 0);
+        }
+
+        #title {
             width: 100%;
+            height: 40px;
+            line-height: 35px;
             text-align: center;
+            font-size: medium;
+        }
+
+        #oper {
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            padding-left: 10px;
+            line-height: 35px;
+            text-align: left;
+            font-size: large;
+            color: rgb(160, 160, 160);
         }
 
         #result {
-            width: 40%;
+            width: 100%;
+            height: 40px;
+            padding-right: 10px;
             text-align: right;
+            font-size: x-large;
+            font-weight: bold;
+            border: 1px solid rgb(192, 192, 192);
+            overflow: hidden;
         }
 
         input::-webkit-inner-spin-button {
@@ -36,9 +66,9 @@
         button {
             margin: 0px;
             border: 0px;
+            font-size: large;
             background-color: rgb(248, 248, 248);
             border: 1px solid rgb(192, 192, 192);
-            font-size: large;
         }
 
         button:hover {
@@ -46,17 +76,33 @@
         }
 
         button:active {
-            background-color: rgb(192, 192, 224);
+            background-color: rgb(192, 192, 192);
         }
 
-        button:not(#zero) {
-            width: 10%;
+        button:not(.x2) {
+            width: 25%;
             height: 100%;
         }
 
-        #zero {
-            width: 20%;
+        .btn_number {
+            font-weight: bold;
+        }
+
+        .x2 {
+            width: 50%;
             height: 100%;
+        }
+
+        #btn_result {
+            background-color: rgb(192, 192, 248);
+        }
+
+        #btn_result:hover {
+            background-color: rgb(160, 160, 248);
+        }
+
+        #btn_result:active {
+            background-color: rgb(128, 128, 248);
         }
 
         .row>[class^=col] {
@@ -68,43 +114,132 @@
 
 <body>
     <div class="container">
-        <!-- 결과 표시 -->
-        <input type="number" id="result">
-        <div class="row gy-0 btn_box">
-            <div class="col-12">
-                <button class="number">7</button>
-                <button class="number">8</button>
-                <button class="number">9</button>
-                <button class="oper">/</button>
-            </div>
-            <div class="col-12">
-                <button class="number">4</button>
-                <button class="number">5</button>
-                <button class="number">6</button>
-                <button class="oper">*</button>
-            </div>
-            <div class="col-12">
-                <button class="number">1</button>
-                <button class="number">2</button>
-                <button class="number">3</button>
-                <button class="oper">-</button>
-            </div>
-            <div class="col-12">
-                <button class="number" id="zero">0</button>
-                <button id="btn_result">=</button>
-                <button class="oper">+</button>
+        <div class="box">
+            <div id="title">계산기(easy)</div>
+            <div id="oper"></div>
+            <div id="result">0</div>
+            <div class="row gy-0 btn_box">
+                <div class="col-12">
+                    <button class="x2" id="btn_clear">Clear</button>
+                    <button class="x2" id="btn_bs">Back</button>
+                </div>
+                <div class="col-12">
+                    <button class="btn_number">7</button>
+                    <button class="btn_number">8</button>
+                    <button class="btn_number">9</button>
+                    <button class="btn_oper">/</button>
+                </div>
+                <div class="col-12">
+                    <button class="btn_number">4</button>
+                    <button class="btn_number">5</button>
+                    <button class="btn_number">6</button>
+                    <button class="btn_oper">*</button>
+                </div>
+                <div class="col-12">
+                    <button class="btn_number">1</button>
+                    <button class="btn_number">2</button>
+                    <button class="btn_number">3</button>
+                    <button class="btn_oper">-</button>
+                </div>
+                <div class="col-12">
+                    <button class="btn_number x2">0</button>
+                    <button id="btn_result">=</button>
+                    <button class="btn_oper">+</button>
+                </div>
             </div>
         </div>
     </div>
     <script>
-        // 미션1 : 각 숫자버튼을 클릭할때 숫자를 result input 태그에 입력되게 하기
+        // 미션1 : 각 숫자버튼을 클릭할때 숫자를 result div 태그에 입력되게 하기
         // - 조건 : 각 버튼에 id 할당하지 않음. 클래스명으로 가져오는법 알아볼 것.
         // - 힌트 : array
 
-        let commit;
+        let btn_number = document.getElementsByClassName("btn_number");
+        console.log(btn_number);
+
+        let num0 = btn_number[9];
+        let num1 = btn_number[6];
+        let num2 = btn_number[7];
+        let num3 = btn_number[8];
+        let num4 = btn_number[3];
+        let num5 = btn_number[4];
+        let num6 = btn_number[5];
+        let num7 = btn_number[0];
+        let num8 = btn_number[1];
+        let num9 = btn_number[2];
 
 
+        // 배열이 어떤 법칙으로 저장되는지, 꺼내서 사용할 방법 생각해보기
+       
+       
 
+        let resultView = document.getElementById("result");
+        num0.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 0);};
+        num1.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 1);};
+        num2.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 2);};
+        num3.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 3);};
+        num4.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 4);};
+        num5.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 5);};
+        num6.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 6);};
+        num7.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 7);};
+        num8.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 8);};
+        num9.onclick = function() {resultView.innerHTML = parseInt(resultView.innerHTML + 9);};
+
+
+        let btnClear = document.getElementById("btn_clear");
+        let btnBack = document.getElementById("btn_bs");
+        let btn_result = document.getElementById("btn_result");
+        let btnOper = document.getElementsByClassName("btn_oper");
+
+        console.log(btnOper);
+        console.log(btnOper[0].innerHTML);
+        console.log(btnOper[1].innerHTML);
+        console.log(btnOper[2].innerHTML);
+        console.log(btnOper[3].innerHTML);
+
+        let addition = btnOper[3]; // +
+        let subtraction = btnOper[2]; // -
+        let multiplication = btnOper[1]; // *
+        let division = btnOper[0]; // /
+
+
+        let calc = [];
+        console.log(calc);
+
+        addition.onclick = function() {
+            calc.push(parseInt(resultView.innerHTML));
+            // calc.push(btnOper[3].innerHTML);
+            console.log(calc);
+            resultView.innerHTML = "";
+        };  
+
+        btn_result.onclick = function() {
+            // calc.push(parseInt(resultView.innerHTML));
+
+            console.log(calc[0]);
+            console.log(calc[1]);
+            console.log(calc[2]);
+            console.log(calc[3]);
+            console.log(calc[4]);
+            console.log(calc[5]);
+            console.log(calc[6]);
+
+
+            for(let i = 0;i<calc.length;i++){
+                resultView.innerHTML = parseInt(resultView.innerHTML) + parseInt(calc[i]);
+            };
+            
+        };  
+
+        console.log(calc);
+
+
+        btnClear.onclick =  function(){
+            calc = []; 
+            resultView.innerHTML = "";
+            console.log(calc);
+        };
+        
 
     </script>
 </body>
